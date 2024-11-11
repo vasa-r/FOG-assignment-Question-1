@@ -74,7 +74,7 @@ export interface Song {
   artist: string;
   url: string;
   duration: number; // in seconds
-  radio: string;
+  playCount: string;
   album: string;
   timeStamp: number; // in minutes
 }

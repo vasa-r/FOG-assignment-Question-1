@@ -5,13 +5,27 @@ import Play from "../../assets/play.svg";
 import Pause from "../../assets/pause.svg";
 import Previous from "../../assets/prev.svg";
 import Next from "../../assets/next.svg";
-import { useState } from "react";
+import { useAudioPlayer } from "../../hooks/useAudioPlayer";
 
 const ControlsSidebar = () => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const {
+    currentSong,
+    isPlaying,
+    isLooping,
+    isShuffling,
+    togglePlayPause,
+    handleNextSong,
+    handlePreviousSong,
+    toggleLoop,
+    toggleShuffle,
+    currentTime,
+  } = useAudioPlayer(); // Using the hook with no arguments
+
+  console.log(currentSong);
+
+  const formattedCurrentTime = new Date(currentTime * 1000)
+    .toISOString()
+    .substr(14, 5); // Convert to mm:ss format
 
   return (
     <aside className="w-[20%] bg-custom-dark-gradient p-4 px-6 flex flex-col justify-end">
@@ -21,31 +35,43 @@ const ControlsSidebar = () => {
         </p>
         <img src={MJ} alt="artist image" />
         <div className="flex flex-col items-center justify-center">
-          <h2 className="text-lg font-semibold text-[#F6F6F6]">Beat It</h2>
-          <p className="text-main font-normal text-[13px]">Michael Jackson</p>
+          <h2 className="text-lg font-semibold text-[#F6F6F6]">
+            {currentSong?.title}
+          </h2>
+          <p className="text-main font-normal text-[13px]">
+            {currentSong?.artist}
+          </p>
         </div>
         <div className="flex items-center gap-2">
-          <p className="font-medium text-[#F6F6F6] text-[13px]">2:15</p>
+          <p className="font-medium text-[#F6F6F6] text-[13px]">
+            {formattedCurrentTime}
+          </p>
           <hr className="w-[100%] bg-white" />
-          <p className="font-medium text-[#F6F6F6] text-[13px]">5:15</p>
+          <p className="font-medium text-[#F6F6F6] text-[13px]">
+            {currentSong.timeStamp}
+          </p>
         </div>
         {/* controls */}
         <div className="flex items-center justify-between w-full">
           <img
             src={Loop}
             alt="loop song"
-            className="cursor-pointer hover:scale-110"
+            className={`cursor-pointer hover:scale-110 ${
+              isLooping ? "scale-110" : ""
+            }`}
+            onClick={toggleLoop}
           />
           <img
             src={Previous}
             alt="previous song"
             className="cursor-pointer hover:scale-110"
+            onClick={handlePreviousSong}
           />
           <div className="bg-[#480000] rounded-[10px] flex justify-center items-center p-2">
             <img
               src={isPlaying ? Pause : Play}
               alt="play/pause"
-              onClick={togglePlay}
+              onClick={togglePlayPause}
               className="transition-all duration-300 transform cursor-pointer size-7 hover:scale-110"
             />
           </div>
@@ -53,11 +79,15 @@ const ControlsSidebar = () => {
             src={Next}
             alt="next song"
             className="cursor-pointer hover:scale-110"
+            onClick={handleNextSong}
           />
           <img
             src={Shuffle}
             alt="shuffle song"
-            className="cursor-pointer hover:scale-110"
+            className={`cursor-pointer hover:scale-110 ${
+              isShuffling ? "scale-110" : ""
+            }`}
+            onClick={toggleShuffle}
           />
         </div>
       </div>

@@ -5,7 +5,7 @@ import MusicList from "./MusicList";
 
 const MainBody = () => {
   return (
-    <main className="w-[55%] bg-custom-gradient">
+    <main className="w-[55%] bg-custom-gradient overflow-y-auto">
       <MainNav />
       <ArtistCard />
       <MusicList />

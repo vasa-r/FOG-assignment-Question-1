@@ -1,7 +1,8 @@
-import React from "react";
+import { useAudioPlayer } from "../../hooks/useAudioPlayer";
 import { songs } from "../../utils/constants";
 
 const MusicList = () => {
+  const { playSong } = useAudioPlayer();
   return (
     <div className="pt-6">
       <div className="flex items-center justify-between w-full px-[3.5rem]">
@@ -25,6 +26,7 @@ const MusicList = () => {
             {songs.map((song, index) => (
               <tr
                 key={song.id}
+                onClick={() => playSong(song)}
                 className={`relative text-main font-medium hover:bg-[#520000] hover:border-l-4 hover:border-[#CA0000] border-l-4 border-transparent text-base`}
               >
                 <td className="py-2 px-14">{index + 1}</td>

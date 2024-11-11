@@ -21,6 +21,9 @@ export default {
           "linear-gradient(180deg, #270909 0%, #0E0D0D 100%), linear-gradient(90deg, rgba(0, 0, 0, 0) 73.01%, rgba(15, 15, 15, 0.6) 73.01%)",
         "artist-bg-image": "url('./src/assets/artist-bg.png')",
       },
+      boxShadow: {
+        custom: "0px 0px 10px 0px rgba(0, 0, 0, 0.25)",
+      },
     },
   },
   plugins: [],
