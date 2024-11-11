@@ -1,3 +1,11 @@
+import Home from "../assets/home.svg";
+import Trend from "../assets/trends.svg";
+import Lib from "../assets/music.svg";
+import Discover from "../assets/discover.svg";
+
+import Settings from "../assets/settings.svg";
+import Logout from "../assets/logout.svg";
+
 export const songs = [
   {
     id: 1,
@@ -60,4 +68,53 @@ export interface Song {
   radio: string;
   album: string;
   timeStamp: number; // in minutes
+}
+
+export const menu: GeneralItem[] = [
+  {
+    id: "home-id",
+    image: Home,
+    label: "Home",
+    alt: "Home Icon",
+  },
+  {
+    id: "trend-id",
+    image: Trend,
+    label: "Trends",
+    alt: "Trends Icon",
+  },
+  {
+    id: "lib-id",
+    image: Lib,
+    label: "Library",
+    alt: "Library Icon",
+  },
+  {
+    id: "discover-id",
+    image: Discover,
+    label: "Discover",
+    alt: "Discover Icon",
+  },
+];
+
+export const general: GeneralItem[] = [
+  {
+    id: "settings-id",
+    image: Settings,
+    label: "Settings",
+    alt: "Settings Icon",
+  },
+  {
+    id: "logout-id",
+    image: Logout,
+    label: "Log Out",
+    alt: "Log Out Icon",
+  },
+];
+
+export interface GeneralItem {
+  id: string;
+  image: string;
+  label: string;
+  alt: string;
 }
