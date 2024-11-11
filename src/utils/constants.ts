@@ -6,6 +6,10 @@ import Discover from "../assets/discover.svg";
 import Settings from "../assets/settings.svg";
 import Logout from "../assets/logout.svg";
 
+import Billie from "../assets/billie_beat_thumb.png";
+import Dont from "../assets/dont_rock_thumb.png";
+import Smooth from "../assets/smooth_thumb.png";
+
 export const songs = [
   {
     id: 1,
@@ -13,9 +17,10 @@ export const songs = [
     artist: "Michael Jackson",
     url: "/audio/billie_jean.mp3",
     duration: 273, // 4 minutes and 53 seconds
-    radio: "1.040.811.084",
+    playCount: "1.040.811.084",
     album: "Thriller 25",
     timeStamp: 4.53,
+    artistImage: Billie,
   },
   {
     id: 2,
@@ -23,9 +28,10 @@ export const songs = [
     artist: "Michael Jackson",
     url: "/audio/beat_it.mp3",
     duration: 258, // 4 minutes and 18 seconds
-    radio: "643.786.045",
+    playCount: "643.786.045",
     album: "Thriller 25",
     timeStamp: 4.18,
+    artistImage: Billie,
   },
   {
     id: 3,
@@ -33,9 +39,10 @@ export const songs = [
     artist: "Michael Jackson",
     url: "/audio/smooth_criminal.mp3",
     duration: 256, // 4 minutes and 16 seconds
-    radio: "407.234.004",
+    playCount: "407.234.004",
     album: "Thriller 25",
     timeStamp: 4.16,
+    artistImage: Smooth,
   },
   {
     id: 4,
@@ -43,9 +50,10 @@ export const songs = [
     artist: "Michael Jackson",
     url: "/audio/dont_stop.mp3",
     duration: 351, // 5 minutes and 51 seconds
-    radio: "316.391.952",
+    playCount: "316.391.952",
     album: "Bad 25th Anniversary",
     timeStamp: 5.51,
+    artistImage: Dont,
   },
   {
     id: 5,
@@ -53,9 +61,10 @@ export const songs = [
     artist: "Michael Jackson",
     url: "/audio/rock_with_you.mp3",
     duration: 203, // 3 minutes and 23 seconds
-    radio: "268.187.218",
+    playCount: "268.187.218",
     album: "Off The Wall",
     timeStamp: 3.23,
+    artistImage: Dont,
   },
 ];
 
@@ -118,3 +127,22 @@ export interface GeneralItem {
   label: string;
   alt: string;
 }
+
+export const navItems = [
+  {
+    id: "music-id",
+    label: "Music",
+  },
+  {
+    id: "podcast-id",
+    label: "Podcast",
+  },
+  {
+    id: "live-id",
+    label: "Live",
+  },
+  {
+    id: "radio-id",
+    label: "Radio",
+  },
+];
