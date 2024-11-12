@@ -94,7 +94,7 @@ const ControlsSidebar = () => {
             </div>
           </div>
           <p className="font-medium text-[#F6F6F6] text-[13px]">
-            {currentSong.timeStamp}
+            {currentSong?.timeStamp}
           </p>
         </div>
 
