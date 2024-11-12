@@ -1,8 +1,8 @@
-import { useAudioPlayer } from "../../hooks/useAudioPlayer";
+import { useAudioPlayer } from "../../context/AudioPlayerContext";
 import { songs } from "../../utils/constants";
 
 const MusicList = () => {
-  const { playSong } = useAudioPlayer();
+  const { playSong, currentSong } = useAudioPlayer();
   return (
     <div className="pt-6">
       <div className="flex items-center justify-between w-full px-[3.5rem]">
@@ -27,7 +27,11 @@ const MusicList = () => {
               <tr
                 key={song.id}
                 onClick={() => playSong(song)}
-                className={`relative text-main font-medium hover:bg-[#520000] hover:border-l-4 hover:border-[#CA0000] border-l-4 border-transparent text-base`}
+                className={`${
+                  currentSong.id === song.id
+                    ? `bg-[#520000] border-[#CA0000]`
+                    : ""
+                } relative text-main font-medium hover: hover:border-l-4 hover:bg-[#2C0000] border-l-4 border-transparent text-base cursor-pointer`}
               >
                 <td className="py-2 px-14">{index + 1}</td>
                 <td className="relative flex items-center gap-2 py-2">

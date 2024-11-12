@@ -5,7 +5,8 @@ import Play from "../../assets/play.svg";
 import Pause from "../../assets/pause.svg";
 import Previous from "../../assets/prev.svg";
 import Next from "../../assets/next.svg";
-import { useAudioPlayer } from "../../hooks/useAudioPlayer";
+import { useEffect, useState } from "react";
+import { useAudioPlayer } from "../../context/AudioPlayerContext";
 
 const ControlsSidebar = () => {
   const {
@@ -18,18 +19,54 @@ const ControlsSidebar = () => {
     handlePreviousSong,
     toggleLoop,
     toggleShuffle,
-    currentTime,
-  } = useAudioPlayer(); // Using the hook with no arguments
+    howlInstance,
+  } = useAudioPlayer();
 
-  console.log(currentSong);
+  const [currentTime, setCurrentTime] = useState(0);
 
-  const formattedCurrentTime = new Date(currentTime * 1000)
-    .toISOString()
-    .substr(14, 5); // Convert to mm:ss format
+  useEffect(() => {
+    let animationFrameId: number;
+
+    // Function to update currentTime based on actual playback time
+    const updateTime = () => {
+      if (howlInstance && isPlaying) {
+        const time = howlInstance.seek(); // Get the current playback position
+        if (time !== null) {
+          setCurrentTime(time); // Update the local state with the time
+        }
+      }
+      animationFrameId = requestAnimationFrame(updateTime); // Schedule next update
+    };
+
+    if (isPlaying && howlInstance) {
+      updateTime(); // Start the updating loop when the song is playing
+    }
+
+    // Cleanup function to cancel animation frame and stop updating
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [isPlaying, howlInstance]);
+
+  // Format time to mm:ss
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const secs = Math.floor(seconds % 60)
+      .toString()
+      .padStart(2, "0");
+    return `${mins}:${secs}`;
+  };
+
+  // Progress percentage for the progress bar
+  const progressPercentage =
+    currentSong.duration > 0 ? (currentTime / currentSong.duration) * 100 : 0;
 
   return (
     <aside className="w-[20%] bg-custom-dark-gradient p-4 px-6 flex flex-col justify-end">
       <div className="flex flex-col gap-3 shadow-custom bg-[#6B0000] rounded-[15px] p-5">
+        {/* Song Information */}
         <p className="text-[#F6F6F6] font-semibold text-sm text-center">
           Now Playing
         </p>
@@ -42,17 +79,27 @@ const ControlsSidebar = () => {
             {currentSong?.artist}
           </p>
         </div>
+
+        {/* Progress Bar and Time Display */}
         <div className="flex items-center gap-2">
           <p className="font-medium text-[#F6F6F6] text-[13px]">
-            {formattedCurrentTime}
+            {formatTime(currentTime)}
           </p>
-          <hr className="w-[100%] bg-white" />
+          <div className="relative z-0 flex-1 h-1 overflow-hidden bg-gray-500 rounded-full">
+            <div
+              className="h-full bg-[#F6F6F6] z-0 transition-all duration-300 relative"
+              style={{ width: `${progressPercentage}%` }}
+            >
+              {/* <div className="absolute right-0 z-20 size-8 border-8 border-[#F6F6F6] rounded-full"></div> */}
+            </div>
+          </div>
           <p className="font-medium text-[#F6F6F6] text-[13px]">
             {currentSong.timeStamp}
           </p>
         </div>
-        {/* controls */}
-        <div className="flex items-center justify-between w-full">
+
+        {/* Music Controls */}
+        <div className="flex items-center justify-between w-full mt-3">
           <img
             src={Loop}
             alt="loop song"
