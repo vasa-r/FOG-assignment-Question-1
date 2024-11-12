@@ -23,6 +23,7 @@ const ControlsSidebar = () => {
   } = useAudioPlayer();
 
   const [currentTime, setCurrentTime] = useState(0);
+  // const [progressBarWidth, setProgressbarWidth] = useState(0);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -62,6 +63,13 @@ const ControlsSidebar = () => {
   // Progress percentage for the progress bar
   const progressPercentage =
     currentSong.duration > 0 ? (currentTime / currentSong.duration) * 100 : 0;
+
+  // const progressPercentage = (currentTime: number, currentSong: Song) => {
+  //   if (currentSong?.duration > 0 && currentTime >= 0) {
+  //     return (currentTime / currentSong.duration) * 100;
+  //   }
+  //   return 0;
+  // };
 
   return (
     <aside className="w-[20%] bg-custom-dark-gradient p-4 px-6 flex flex-col justify-end">

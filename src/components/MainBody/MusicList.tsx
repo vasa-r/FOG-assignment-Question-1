@@ -29,7 +29,7 @@ const MusicList = () => {
                 onClick={() => playSong(song)}
                 className={`${
                   currentSong.id === song.id
-                    ? `bg-[#520000]  border-borderRed`
+                    ? `bg-[#520000] border-l-borderRed transition-colors duration-200`
                     : ""
                 } relative text-main font-medium  hover:bg-[#2C0000] border-l-4 border-transparent text-base cursor-pointer`}
               >
