@@ -29,9 +29,9 @@ const MusicList = () => {
                 onClick={() => playSong(song)}
                 className={`${
                   currentSong.id === song.id
-                    ? `bg-[#520000] border-[#CA0000]`
+                    ? `bg-[#520000]  border-borderRed`
                     : ""
-                } relative text-main font-medium hover: hover:border-l-4 hover:bg-[#2C0000] border-l-4 border-transparent text-base cursor-pointer`}
+                } relative text-main font-medium  hover:bg-[#2C0000] border-l-4 border-transparent text-base cursor-pointer`}
               >
                 <td className="py-2 px-14">{index + 1}</td>
                 <td className="relative flex items-center gap-2 py-2">

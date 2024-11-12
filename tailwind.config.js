@@ -13,6 +13,7 @@ export default {
       colors: {
         main: "#CFC5C5",
         basepPink: "#FF5656",
+        borderRed: "#CA0000",
       },
       backgroundImage: {
         "custom-gradient":
